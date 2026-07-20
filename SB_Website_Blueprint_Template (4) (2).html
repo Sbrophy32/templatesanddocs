@@ -1,0 +1,1575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Website Blueprint — [CLIENT NAME]</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Archivo:wght@400;600;700;800&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Work Sans', sans-serif;
+    color: #2A2621;
+    background: #FFFFFF;
+    font-size: 11pt;
+    line-height: 1.65;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* PAGE LAYOUT */
+  .page {
+    width: 8.5in;
+    min-height: 11in;
+    padding: 0.7in 0.8in;
+    background: #FFFFFF;
+    margin: 0 auto;
+    page-break-after: always;
+    position: relative;
+  }
+  .page:last-child { page-break-after: avoid; }
+
+  /* COVER PAGE */
+  .cover {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 11in;
+    padding: 0.8in 0.8in 0.6in;
+    background: #2A2621;
+    color: #FFFFFF;
+  }
+  .cover-top { display: flex; justify-content: space-between; align-items: flex-start; }
+  .cover-logo {
+    font-family: 'Archivo', sans-serif;
+    font-size: 11pt;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #D6EAEA;
+  }
+  .cover-tag {
+    font-family: 'Archivo', sans-serif;
+    font-size: 8pt;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #8C9A7C;
+    text-align: right;
+  }
+  .cover-body { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 0.8in 0; }
+  .cover-eyebrow {
+    font-family: 'Archivo', sans-serif;
+    font-size: 8pt;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #8C9A7C;
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .cover-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 24px;
+    height: 1.5px;
+    background: #8C9A7C;
+  }
+  .cover-h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 42pt;
+    font-weight: 700;
+    color: #FFFFFF;
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+  .cover-h1 em {
+    font-style: italic;
+    color: #D6EAEA;
+  }
+  .cover-sub {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 12pt;
+    color: #B0ABA1;
+    max-width: 420px;
+    line-height: 1.6;
+    margin-top: 16px;
+  }
+  .cover-client-block {
+    border-top: 1px solid #3a3632;
+    padding-top: 24px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0;
+  }
+  .cover-field label {
+    font-family: 'Archivo', sans-serif;
+    font-size: 7.5pt;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #6B6459;
+    display: block;
+    margin-bottom: 4px;
+  }
+  .cover-field span {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 10.5pt;
+    color: #FFFFFF;
+    font-weight: 500;
+  }
+
+  /* SECTION PAGES — shared layout */
+  .section-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 28px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid #D6EAEA;
+  }
+  .section-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 48pt;
+    font-weight: 700;
+    color: #D6EAEA;
+    line-height: 1;
+    flex-shrink: 0;
+    margin-right: 20px;
+    margin-top: -6px;
+  }
+  .section-title-block {}
+  .section-eyebrow {
+    font-family: 'Archivo', sans-serif;
+    font-size: 7.5pt;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #8C9A7C;
+    margin-bottom: 4px;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22pt;
+    font-weight: 700;
+    color: #2A2621;
+    line-height: 1.2;
+  }
+  .section-url {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 8pt;
+    color: #B0ABA1;
+    text-align: right;
+    flex-shrink: 0;
+    margin-top: 4px;
+  }
+
+  /* SCORE BADGE */
+  .score-row {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+  .score-badge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 68px;
+    height: 68px;
+    border-radius: 6px;
+    flex-shrink: 0;
+  }
+  .score-badge.red { background: #fdf1f1; border: 1.5px solid #e8c5c5; }
+  .score-badge.yellow { background: #fdf8ee; border: 1.5px solid #e8d8a0; }
+  .score-badge.green { background: #f1f6f1; border: 1.5px solid #b0c8b0; }
+  .score-num {
+    font-family: 'Archivo', sans-serif;
+    font-size: 20pt;
+    font-weight: 800;
+    line-height: 1;
+  }
+  .score-badge.red .score-num { color: #b85555; }
+  .score-badge.yellow .score-num { color: #a07830; }
+  .score-badge.green .score-num { color: #4a7a4a; }
+  .score-label {
+    font-family: 'Archivo', sans-serif;
+    font-size: 6.5pt;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #B0ABA1;
+    margin-top: 2px;
+  }
+  .score-summary {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 10.5pt;
+    color: #2A2621;
+    line-height: 1.6;
+    padding-top: 4px;
+  }
+
+  /* FINDINGS TABLE */
+  .findings-label {
+    font-family: 'Archivo', sans-serif;
+    font-size: 7.5pt;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #33585A;
+    margin-bottom: 10px;
+    font-weight: 700;
+  }
+  .finding-row {
+    display: grid;
+    grid-template-columns: 20px 1fr auto;
+    gap: 10px 14px;
+    padding: 10px 0;
+    border-bottom: 0.5px solid #E8E5E0;
+    align-items: start;
+  }
+  .finding-row:last-child { border-bottom: none; }
+  .finding-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-top: 5px;
+    flex-shrink: 0;
+  }
+  .dot-red { background: #c97a7a; }
+  .dot-yellow { background: #c9a63a; }
+  .dot-green { background: #6a9e6a; }
+  .finding-text {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 10pt;
+    color: #2A2621;
+    line-height: 1.55;
+  }
+  .finding-text strong {
+    font-weight: 600;
+    display: block;
+    margin-bottom: 2px;
+  }
+  .finding-text .detail {
+    color: #6B6459;
+    font-size: 9.5pt;
+  }
+  .finding-tag {
+    font-family: 'Archivo', sans-serif;
+    font-size: 7pt;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 3px;
+    white-space: nowrap;
+    margin-top: 2px;
+    font-weight: 700;
+  }
+  .tag-fix { background: #fdf1f1; color: #b85555; border: 1px solid #e8c5c5; }
+  .tag-improve { background: #fdf8ee; color: #a07830; border: 1px solid #e8d8a0; }
+  .tag-keep { background: #f1f6f1; color: #4a7a4a; border: 1px solid #b0c8b0; }
+
+  /* OPPORTUNITY CALLOUT */
+  .opportunity-box {
+    background: #D6EAEA;
+    border-left: 3px solid #33585A;
+    padding: 14px 18px;
+    margin-top: 20px;
+    border-radius: 0 4px 4px 0;
+  }
+  .opportunity-box .opp-label {
+    font-family: 'Archivo', sans-serif;
+    font-size: 7.5pt;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #1E4E50;
+    font-weight: 700;
+    margin-bottom: 5px;
+  }
+  .opportunity-box p {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 10pt;
+    color: #1E4E50;
+    line-height: 1.55;
+  }
+
+  /* PAGE FOOTER */
+  .page-footer {
+    position: absolute;
+    bottom: 0.4in;
+    left: 0.8in;
+    right: 0.8in;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 0.5px solid #E8E5E0;
+    padding-top: 8px;
+  }
+  .footer-brand {
+    font-family: 'Archivo', sans-serif;
+    font-size: 7.5pt;
+    color: #B0ABA1;
+    letter-spacing: 0.06em;
+  }
+  .footer-pg {
+    font-family: 'Archivo', sans-serif;
+    font-size: 7.5pt;
+    color: #B0ABA1;
+  }
+
+  /* PRIORITY MATRIX — implementation plan page */
+  .matrix-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+  .matrix-cell {
+    border: 1px solid #E8E5E0;
+    border-radius: 6px;
+    padding: 14px 16px;
+  }
+  .matrix-cell.high { border-top: 3px solid #c97a7a; }
+  .matrix-cell.medium { border-top: 3px solid #c9a63a; }
+  .matrix-cell.polish { border-top: 3px solid #6a9e6a; }
+  .matrix-cell.hold { border-top: 3px solid #B0ABA1; }
+  .matrix-header {
+    font-family: 'Archivo', sans-serif;
+    font-size: 8pt;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .matrix-cell.high .matrix-header { color: #b85555; }
+  .matrix-cell.medium .matrix-header { color: #a07830; }
+  .matrix-cell.polish .matrix-header { color: #4a7a4a; }
+  .matrix-cell.hold .matrix-header { color: #6B6459; }
+  .matrix-item {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 9.5pt;
+    color: #2A2621;
+    line-height: 1.5;
+    padding: 4px 0;
+    border-bottom: 0.5px solid #F0EDE8;
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+  }
+  .matrix-item:last-child { border-bottom: none; }
+  .matrix-item::before {
+    content: '—';
+    color: #B0ABA1;
+    flex-shrink: 0;
+    font-size: 9pt;
+  }
+
+  /* NEXT STEPS PAGE */
+  .next-step-row {
+    display: grid;
+    grid-template-columns: 28px 1fr;
+    gap: 14px;
+    padding: 16px 0;
+    border-bottom: 0.5px solid #E8E5E0;
+    align-items: start;
+  }
+  .next-step-row:last-child { border-bottom: none; }
+  .step-circle {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #2A2621;
+    color: #FFFFFF;
+    font-family: 'Archivo', sans-serif;
+    font-size: 9pt;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .step-title {
+    font-family: 'Archivo', sans-serif;
+    font-size: 10.5pt;
+    font-weight: 700;
+    color: #2A2621;
+    margin-bottom: 3px;
+  }
+  .step-body {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 10pt;
+    color: #6B6459;
+    line-height: 1.55;
+  }
+
+  /* CLOSING CTA BOX */
+  .cta-box {
+    background: #2A2621;
+    color: #FFFFFF;
+    padding: 32px 36px;
+    border-radius: 6px;
+    margin-top: 28px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 24px;
+    align-items: center;
+  }
+  .cta-box h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 18pt;
+    font-weight: 700;
+    color: #FFFFFF;
+    margin-bottom: 8px;
+    line-height: 1.2;
+  }
+  .cta-box h3 em { font-style: italic; color: #D6EAEA; }
+  .cta-box p {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 10pt;
+    color: #B0ABA1;
+    line-height: 1.6;
+    max-width: 380px;
+  }
+  .cta-pill {
+    background: #D6EAEA;
+    color: #1E4E50;
+    font-family: 'Archivo', sans-serif;
+    font-size: 9pt;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    padding: 14px 22px;
+    border-radius: 4px;
+    text-align: center;
+    white-space: nowrap;
+  }
+  .cta-pill small {
+    display: block;
+    font-size: 7.5pt;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #33585A;
+    margin-bottom: 3px;
+    font-weight: 600;
+  }
+
+  /* SUMMARY SCORE ROW */
+  .summary-scores {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+  .summary-score-cell {
+    text-align: center;
+    padding: 12px 8px;
+    border: 1px solid #E8E5E0;
+    border-radius: 5px;
+  }
+  .summary-score-cell .ss-num {
+    font-family: 'Archivo', sans-serif;
+    font-size: 18pt;
+    font-weight: 800;
+    line-height: 1;
+    margin-bottom: 2px;
+  }
+  .summary-score-cell.red .ss-num { color: #b85555; }
+  .summary-score-cell.yellow .ss-num { color: #a07830; }
+  .summary-score-cell.green .ss-num { color: #4a7a4a; }
+  .summary-score-cell .ss-area {
+    font-family: 'Archivo', sans-serif;
+    font-size: 6.5pt;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #B0ABA1;
+    line-height: 1.3;
+  }
+
+  @page {
+    size: 8.5in 11in;
+    margin: 0;
+  }
+
+  @media print {
+    html, body { margin: 0; padding: 0; }
+    .page {
+      margin: 0 !important;
+      page-break-after: always;
+      page-break-inside: avoid;
+    }
+    .page:last-child { page-break-after: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════
+     PAGE 1 — PACKAGE COVER SHEET
+════════════════════════════════════════════ -->
+<div class="page" style="display:flex;flex-direction:column;padding:0;">
+
+  <!-- TOP BAND -->
+  <div style="background:#2A2621;padding:0.55in 0.8in 0.5in;display:flex;justify-content:space-between;align-items:flex-start;">
+    <div style="font-family:'Archivo',sans-serif;font-size:10pt;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#D6EAEA;">SB Creative Studio</div>
+    <div style="font-family:'Archivo',sans-serif;font-size:7.5pt;letter-spacing:0.14em;text-transform:uppercase;color:#8C9A7C;text-align:right;line-height:1.6;">Confidential<br>Prepared for [CLIENT NAME]</div>
+  </div>
+
+  <!-- HERO -->
+  <div style="background:#2A2621;padding:0.1in 0.8in 0.6in;">
+    <div style="font-family:'Archivo',sans-serif;font-size:7.5pt;letter-spacing:0.18em;text-transform:uppercase;color:#8C9A7C;margin-bottom:14px;display:flex;align-items:center;gap:10px;"><span style="display:inline-block;width:20px;height:1.5px;background:#8C9A7C;"></span>Website Blueprint Package</div>
+    <div style="font-family:'Playfair Display',serif;font-size:32pt;font-weight:700;color:#FFFFFF;line-height:1.15;margin-bottom:10px;">The [Business Name]<br><em style="font-style:italic;color:#D6EAEA;">Website Blueprint.</em></div>
+    <div style="font-family:'Work Sans',sans-serif;font-size:10pt;color:#B0ABA1;line-height:1.65;max-width:480px;margin-top:12px;">Everything in this package was researched and prepared specifically for [BUSINESS NAME]. Start with this page, then work through the Blueprint. The supporting data sections are at the back.</div>
+  </div>
+
+  <!-- CLIENT STRIP -->
+  <div style="background:#1E1C19;padding:16px 0.8in;display:grid;grid-template-columns:1fr 1fr 1fr 1fr;border-top:1px solid #3a3632;">
+    <div><label style="font-family:'Archivo',sans-serif;font-size:7pt;letter-spacing:0.13em;text-transform:uppercase;color:#6B6459;display:block;margin-bottom:3px;">Prepared for</label><span style="font-family:'Work Sans',sans-serif;font-size:9.5pt;color:#FFFFFF;font-weight:500;">[CLIENT NAME]</span></div>
+    <div><label style="font-family:'Archivo',sans-serif;font-size:7pt;letter-spacing:0.13em;text-transform:uppercase;color:#6B6459;display:block;margin-bottom:3px;">Business</label><span style="font-family:'Work Sans',sans-serif;font-size:9.5pt;color:#FFFFFF;font-weight:500;">[BUSINESS NAME]</span></div>
+    <div><label style="font-family:'Archivo',sans-serif;font-size:7pt;letter-spacing:0.13em;text-transform:uppercase;color:#6B6459;display:block;margin-bottom:3px;">Website reviewed</label><span style="font-family:'Work Sans',sans-serif;font-size:9.5pt;color:#FFFFFF;font-weight:500;">[CLIENT URL]</span></div>
+    <div><label style="font-family:'Archivo',sans-serif;font-size:7pt;letter-spacing:0.13em;text-transform:uppercase;color:#6B6459;display:block;margin-bottom:3px;">Prepared on</label><span style="font-family:'Work Sans',sans-serif;font-size:9.5pt;color:#FFFFFF;font-weight:500;">[DATE]</span></div>
+  </div>
+
+  <!-- BODY -->
+  <div style="flex:1;padding:0.45in 0.8in 0.4in;">
+
+    <div style="font-family:'Archivo',sans-serif;font-size:7.5pt;letter-spacing:0.16em;text-transform:uppercase;color:#8C9A7C;font-weight:700;margin-bottom:14px;">What's included in this package</div>
+
+    <!-- DELIVERABLE ROWS -->
+    <div style="display:grid;grid-template-columns:36px 1fr auto;gap:0 16px;padding:14px 0;border-bottom:0.5px solid #E8E5E0;align-items:start;">
+      <div style="font-family:'Playfair Display',serif;font-size:20pt;font-weight:700;color:#D6EAEA;line-height:1;margin-top:2px;">1</div>
+      <div><div style="font-family:'Archivo',sans-serif;font-size:10.5pt;font-weight:700;color:#2A2621;margin-bottom:3px;">Website Blueprint — Full Analysis</div><div style="font-family:'Work Sans',sans-serif;font-size:9.5pt;color:#6B6459;line-height:1.55;">A 12-section review covering design, conversion, local SEO, AI visibility, content, technical health, competitive landscape, site structure, and keyword visibility — with a priority gap summary and walkthrough call.</div></div>
+      <span style="font-family:'Archivo',sans-serif;font-size:7pt;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:4px 10px;border-radius:3px;background:#2A2621;color:#D6EAEA;white-space:nowrap;margin-top:3px;">Main Deliverable</span>
+    </div>
+
+    <div style="display:grid;grid-template-columns:36px 1fr auto;gap:0 16px;padding:14px 0;border-bottom:0.5px solid #E8E5E0;align-items:start;">
+      <div style="font-family:'Playfair Display',serif;font-size:20pt;font-weight:700;color:#D6EAEA;line-height:1;margin-top:2px;">2</div>
+      <div><div style="font-family:'Archivo',sans-serif;font-size:10.5pt;font-weight:700;color:#2A2621;margin-bottom:3px;">PageSpeed Report</div><div style="font-family:'Work Sans',sans-serif;font-size:9.5pt;color:#6B6459;line-height:1.55;">Mobile performance scores from Google PageSpeed Insights — load time, largest contentful paint, and the specific issues flagged as highest impact. See Section 05 of the Blueprint for analysis.</div></div>
+      <span style="font-family:'Archivo',sans-serif;font-size:7pt;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:4px 10px;border-radius:3px;background:#F2F0EC;color:#6B6459;border:1px solid #E0DDD9;white-space:nowrap;margin-top:3px;">Included</span>
+    </div>
+
+    <div style="display:grid;grid-template-columns:36px 1fr auto;gap:0 16px;padding:14px 0;border-bottom:0.5px solid #E8E5E0;align-items:start;">
+      <div style="font-family:'Playfair Display',serif;font-size:20pt;font-weight:700;color:#D6EAEA;line-height:1;margin-top:2px;">3</div>
+      <div><div style="font-family:'Archivo',sans-serif;font-size:10.5pt;font-weight:700;color:#2A2621;margin-bottom:3px;">Site Structure Report</div><div style="font-family:'Work Sans',sans-serif;font-size:9.5pt;color:#6B6459;line-height:1.55;">A complete index of every URL currently on your website — what's indexed, how it's structured, and what's missing. See Page 9 of the Blueprint.</div></div>
+      <span style="font-family:'Archivo',sans-serif;font-size:7pt;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:4px 10px;border-radius:3px;background:#F2F0EC;color:#6B6459;border:1px solid #E0DDD9;white-space:nowrap;margin-top:3px;">Included</span>
+    </div>
+
+    <div style="display:grid;grid-template-columns:36px 1fr auto;gap:0 16px;padding:14px 0;border-bottom:0.5px solid #E8E5E0;align-items:start;">
+      <div style="font-family:'Playfair Display',serif;font-size:20pt;font-weight:700;color:#D6EAEA;line-height:1;margin-top:2px;">4</div>
+      <div><div style="font-family:'Archivo',sans-serif;font-size:10.5pt;font-weight:700;color:#2A2621;margin-bottom:3px;">Keyword Visibility Snapshot</div><div style="font-family:'Work Sans',sans-serif;font-size:9.5pt;color:#6B6459;line-height:1.55;">What terms your site currently ranks for, at what positions, and whether those rankings are generating actual clicks — or sitting invisible behind stronger competitors. See Page 10 of the Blueprint.</div></div>
+      <span style="font-family:'Archivo',sans-serif;font-size:7pt;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:4px 10px;border-radius:3px;background:#F2F0EC;color:#6B6459;border:1px solid #E0DDD9;white-space:nowrap;margin-top:3px;">Included</span>
+    </div>
+
+    <div style="display:grid;grid-template-columns:36px 1fr auto;gap:0 16px;padding:14px 0;align-items:start;">
+      <div style="font-family:'Playfair Display',serif;font-size:20pt;font-weight:700;color:#D6EAEA;line-height:1;margin-top:2px;">5</div>
+      <div><div style="font-family:'Archivo',sans-serif;font-size:10.5pt;font-weight:700;color:#2A2621;margin-bottom:3px;">Walkthrough Call</div><div style="font-family:'Work Sans',sans-serif;font-size:9.5pt;color:#6B6459;line-height:1.55;">A 1:1 call to walk through the Blueprint together, answer your questions, and talk through what the findings mean for your business specifically. Scheduling details on the final page.</div></div>
+      <span style="font-family:'Archivo',sans-serif;font-size:7pt;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:4px 10px;border-radius:3px;background:#F2F0EC;color:#6B6459;border:1px solid #E0DDD9;white-space:nowrap;margin-top:3px;">Included</span>
+    </div>
+
+    <!-- HOW TO USE -->
+    <div style="background:#F9F8F7;border:1px solid #E8E5E0;border-radius:6px;padding:16px 20px;margin-top:24px;">
+      <div style="font-family:'Archivo',sans-serif;font-size:7.5pt;letter-spacing:0.14em;text-transform:uppercase;color:#8C9A7C;font-weight:700;margin-bottom:10px;">How to use this package</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;">
+        <div style="display:flex;gap:10px;align-items:flex-start;"><div style="width:22px;height:22px;border-radius:50%;background:#2A2621;color:#FFFFFF;font-family:'Archivo',sans-serif;font-size:8pt;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">1</div><div style="font-family:'Work Sans',sans-serif;font-size:9pt;color:#2A2621;line-height:1.5;">Read the Blueprint from page 2 — it tells the full story and references supporting data where relevant.</div></div>
+        <div style="display:flex;gap:10px;align-items:flex-start;"><div style="width:22px;height:22px;border-radius:50%;background:#2A2621;color:#FFFFFF;font-family:'Archivo',sans-serif;font-size:8pt;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">2</div><div style="font-family:'Work Sans',sans-serif;font-size:9pt;color:#2A2621;line-height:1.5;">Review the data sections at the back — Site Structure (p.9) and Keyword Visibility (p.10) — at your own pace.</div></div>
+        <div style="display:flex;gap:10px;align-items:flex-start;"><div style="width:22px;height:22px;border-radius:50%;background:#2A2621;color:#FFFFFF;font-family:'Archivo',sans-serif;font-size:8pt;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">3</div><div style="font-family:'Work Sans',sans-serif;font-size:9pt;color:#2A2621;line-height:1.5;">Bring your questions to the walkthrough call. That's where we talk through what it all means for your business.</div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <div style="padding:14px 0.8in;border-top:0.5px solid #E8E5E0;display:flex;justify-content:space-between;align-items:center;">
+    <span style="font-family:'Archivo',sans-serif;font-size:7.5pt;color:#B0ABA1;letter-spacing:0.06em;">SB Creative Studio · Website Blueprint Package</span>
+    <span style="font-family:'Work Sans',sans-serif;font-size:7.5pt;color:#B0ABA1;">sbcreativestudio.com</span>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════
+     COVER PAGE
+════════════════════════════════════════════ -->
+<div class="page cover">
+  <div class="cover-top">
+    <div class="cover-logo">SB Creative Studio</div>
+    <div class="cover-tag">Confidential<br>Prepared for [CLIENT NAME]</div>
+  </div>
+
+  <div class="cover-body">
+    <div class="cover-eyebrow">Website Blueprint</div>
+    <div class="cover-h1">The [Business Name]<br><em>Website</em><br>Blueprint.</div>
+    <div class="cover-sub">A six-area review of your website — prepared exclusively for [CLIENT NAME].</div>
+  </div>
+
+  <div class="cover-client-block">
+    <div class="cover-field">
+      <label>Prepared for</label>
+      <span>[CLIENT NAME] / [BUSINESS NAME]</span>
+    </div>
+    <div class="cover-field">
+      <label>Website reviewed</label>
+      <span>[CLIENT URL]</span>
+    </div>
+    <div class="cover-field">
+      <label>Review date</label>
+      <span>[DATE]</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     PAGE 2 — CURRENT SITUATION
+════════════════════════════════════════════ -->
+<div class="page">
+  <div class="section-header">
+    <div style="display:flex;align-items:flex-start;flex:1;">
+      <div class="section-num" style="font-size:36pt;color:#8C9A7C;margin-right:16px;"></div>
+      <div class="section-title-block">
+        <div class="section-eyebrow">Before the Scores</div>
+        <div class="section-title">Current Situation</div>
+      </div>
+    </div>
+    <div class="section-url">[CLIENT URL]</div>
+  </div>
+
+  <p style="font-family:'Work Sans',sans-serif;font-size:11pt;color:#2A2621;line-height:1.75;margin-bottom:22px;">
+    [Write 2-3 paragraphs in plain, direct language describing what's actually happening with this business's website right now. No scores, no bullets — just an honest read. Structure it loosely around three things: what's working as a foundation, what the site is failing to do despite that foundation, and what the single biggest gap is costing them. Write it the way you'd explain it to a friend over coffee. This page is read before any scores land, so it sets the emotional tone for the whole document — it should feel like a knowledgeable person who actually looked at their site, not a software report.]
+  </p>
+
+  <p style="font-family:'Work Sans',sans-serif;font-size:11pt;color:#2A2621;line-height:1.75;margin-bottom:22px;">
+    [Second paragraph — what the site is actively failing to do. Be specific about what a visitor experiences, what they can't find, what trust signals are missing, or what happens when they try to take action. Keep it honest but not brutal — the goal is clarity, not discouragement.]
+  </p>
+
+  <p style="font-family:'Work Sans',sans-serif;font-size:11pt;color:#2A2621;line-height:1.75;margin-bottom:28px;">
+    [Third paragraph — the single clearest gap. One thing, stated plainly. This is the thread that runs through the whole review and comes back on the call. E.g. "The site is visible — people are finding it — but it's not converting that visibility into calls. That's the gap this review focuses on."]
+  </p>
+
+  <div style="background:#F9F8F7;border:1px solid #E8E5E0;border-radius:6px;padding:20px 24px;">
+    <div style="font-family:'Archivo',sans-serif;font-size:7.5pt;letter-spacing:0.14em;text-transform:uppercase;color:#8C9A7C;font-weight:700;margin-bottom:10px;">What this review covers</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px 20px;">
+      <div style="font-family:'Work Sans',sans-serif;font-size:9.5pt;color:#2A2621;display:flex;gap:8px;align-items:flex-start;"><span style="color:#8C9A7C;font-weight:700;flex-shrink:0;">01</span> Design &amp; User Experience</div>
+      <div style="font-family:'Work Sans',sans-serif;font-size:9.5pt;color:#2A2621;display:flex;gap:8px;align-items:flex-start;"><span style="color:#8C9A7C;font-weight:700;flex-shrink:0;">02</span> Conversion</div>
+      <div style="font-family:'Work Sans',sans-serif;font-size:9.5pt;color:#2A2621;display:flex;gap:8px;align-items:flex-start;"><span style="color:#8C9A7C;font-weight:700;flex-shrink:0;">03</span> Local SEO &amp; AI Visibility</div>
+      <div style="font-family:'Work Sans',sans-serif;font-size:9.5pt;color:#2A2621;display:flex;gap:8px;align-items:flex-start;"><span style="color:#8C9A7C;font-weight:700;flex-shrink:0;">04</span> Content &amp; Messaging</div>
+      <div style="font-family:'Work Sans',sans-serif;font-size:9.5pt;color:#2A2621;display:flex;gap:8px;align-items:flex-start;"><span style="color:#8C9A7C;font-weight:700;flex-shrink:0;">05</span> Technical Health</div>
+      <div style="font-family:'Work Sans',sans-serif;font-size:9.5pt;color:#2A2621;display:flex;gap:8px;align-items:flex-start;"><span style="color:#8C9A7C;font-weight:700;flex-shrink:0;">06</span> Competitive Landscape</div>
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span class="footer-brand">SB Creative Studio · Website Blueprint</span>
+    <span class="footer-pg">2</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     PAGE 3 — SUMMARY SCORECARD
+════════════════════════════════════════════ -->
+<div class="page">
+  <div class="section-header">
+    <div style="display:flex;align-items:flex-start;">
+      <div class="section-num" style="font-size:36pt;color:#8C9A7C;margin-right:16px;">00</div>
+      <div class="section-title-block">
+        <div class="section-eyebrow">Overview</div>
+        <div class="section-title">At a Glance</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="summary-scores">
+    <div class="summary-score-cell yellow">
+      <div class="ss-num">6</div>
+      <div class="ss-area">Design &amp; UX</div>
+    </div>
+    <div class="summary-score-cell red">
+      <div class="ss-num">4</div>
+      <div class="ss-area">Conversion</div>
+    </div>
+    <div class="summary-score-cell red">
+      <div class="ss-num">3</div>
+      <div class="ss-area">Local SEO</div>
+    </div>
+    <div class="summary-score-cell yellow">
+      <div class="ss-num">5</div>
+      <div class="ss-area">Content &amp; Copy</div>
+    </div>
+    <div class="summary-score-cell red">
+      <div class="ss-num">4</div>
+      <div class="ss-area">Technical</div>
+    </div>
+    <div class="summary-score-cell yellow">
+      <div class="ss-num">6</div>
+      <div class="ss-area">vs. Competitors</div>
+    </div>
+  </div>
+
+  <p style="font-family:'Work Sans',sans-serif;font-size:10.5pt;color:#2A2621;line-height:1.65;margin-bottom:20px;">
+    <strong style="font-family:'Archivo',sans-serif;font-size:10pt;">[OVERALL SUMMARY — 2-3 sentences.]</strong> Replace with a plain-language read of the site overall. Lead with the most honest take: what the site does well, what is actively costing them, and the single biggest gap to close first.
+  </p>
+
+  <div style="margin-bottom:20px;">
+    <div class="findings-label">Key findings at a glance</div>
+    <div class="finding-row">
+      <div class="finding-dot dot-red"></div>
+      <div class="finding-text"><strong>Biggest issue</strong><span class="detail">[Replace with the single most damaging finding from all six sections.]</span></div>
+      <span class="finding-tag tag-fix">Fix First</span>
+    </div>
+    <div class="finding-row">
+      <div class="finding-dot dot-red"></div>
+      <div class="finding-text"><strong>Second priority</strong><span class="detail">[Second most urgent finding.]</span></div>
+      <span class="finding-tag tag-fix">Fix First</span>
+    </div>
+    <div class="finding-row">
+      <div class="finding-dot dot-yellow"></div>
+      <div class="finding-text"><strong>Medium-term improvement</strong><span class="detail">[A finding that matters but isn't on fire.]</span></div>
+      <span class="finding-tag tag-improve">Improve</span>
+    </div>
+    <div class="finding-row">
+      <div class="finding-dot dot-green"></div>
+      <div class="finding-text"><strong>What's working</strong><span class="detail">[Something genuine to acknowledge — never leave this blank.]</span></div>
+      <span class="finding-tag tag-keep">Keep</span>
+    </div>
+  </div>
+
+  <div class="opportunity-box">
+    <div class="opp-label">Biggest Opportunity</div>
+    <p>[The single highest-leverage thing they could do. Not a list — one clear sentence. This is the thing you'll return to on the call.]</p>
+  </div>
+
+  <div class="page-footer">
+    <span class="footer-brand">SB Creative Studio · Website Blueprint</span>
+    <span class="footer-pg">3</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     PAGE 4 — SECTION 1: DESIGN & UX
+════════════════════════════════════════════ -->
+<div class="page">
+  <div class="section-header">
+    <div style="display:flex;align-items:flex-start;flex:1;">
+      <div class="section-num">01</div>
+      <div class="section-title-block">
+        <div class="section-eyebrow">First Impression, Layout, Clarity</div>
+        <div class="section-title">Design &amp; User Experience</div>
+      </div>
+    </div>
+    <div class="section-url">[CLIENT URL]</div>
+  </div>
+
+  <div class="score-row">
+    <div class="score-badge yellow">
+      <div class="score-num">6</div>
+      <div class="score-label">/ 10</div>
+    </div>
+    <div class="score-summary">
+      [2-3 sentences on the overall design impression. Answer: does the site look credible? Does the layout make sense on first load? What's the strongest visual problem — clutter, dated design, broken mobile, inconsistent brand?]
+    </div>
+  </div>
+
+  <div class="findings-label">Findings</div>
+
+  <div class="finding-row">
+    <div class="finding-dot dot-red"></div>
+    <div class="finding-text">
+      <strong>[Finding title — be specific, e.g. "Hero section has no clear headline"]</strong>
+      <span class="detail">[Explain what you actually saw and why it hurts. 1-2 sentences. No jargon.]</span>
+    </div>
+    <span class="finding-tag tag-fix">Fix</span>
+  </div>
+
+  <div class="finding-row">
+    <div class="finding-dot dot-yellow"></div>
+    <div class="finding-text">
+      <strong>[Finding title]</strong>
+      <span class="detail">[Detail.]</span>
+    </div>
+    <span class="finding-tag tag-improve">Improve</span>
+  </div>
+
+  <div class="finding-row">
+    <div class="finding-dot dot-yellow"></div>
+    <div class="finding-text">
+      <strong>[Finding title]</strong>
+      <span class="detail">[Detail.]</span>
+    </div>
+    <span class="finding-tag tag-improve">Improve</span>
+  </div>
+
+  <div class="finding-row">
+    <div class="finding-dot dot-green"></div>
+    <div class="finding-text">
+      <strong>[What's working]</strong>
+      <span class="detail">[Genuine positive — something that's actually good. Skip if truly nothing is.]</span>
+    </div>
+    <span class="finding-tag tag-keep">Keep</span>
+  </div>
+
+  <div class="opportunity-box">
+    <div class="opp-label">Design Opportunity</div>
+    <p>[The single biggest design lever. Specific — not "improve the design" but "restructuring the hero to lead with the service name and a phone number would immediately lift perceived credibility."]</p>
+  </div>
+
+  <div class="page-footer">
+    <span class="footer-brand">SB Creative Studio · Website Blueprint</span>
+    <span class="footer-pg">3</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     PAGE 4 — SECTION 2: CONVERSION
+════════════════════════════════════════════ -->
+<div class="page">
+  <div class="section-header">
+    <div style="display:flex;align-items:flex-start;flex:1;">
+      <div class="section-num">02</div>
+      <div class="section-title-block">
+        <div class="section-eyebrow">CTAs, Lead Capture, Trust Signals</div>
+        <div class="section-title">Conversion</div>
+      </div>
+    </div>
+    <div class="section-url">[CLIENT URL]</div>
+  </div>
+
+  <div class="score-row">
+    <div class="score-badge red">
+      <div class="score-num">4</div>
+      <div class="score-label">/ 10</div>
+    </div>
+    <div class="score-summary">
+      [How well does the site actually move visitors toward action? Look for: is there a clear CTA above the fold? Are there multiple paths to contact? Do reviews/testimonials appear? Is there anything that builds trust — credentials, photos, years in business?]
+    </div>
+  </div>
+
+  <div class="findings-label">Findings</div>
+
+  <div class="finding-row">
+    <div class="finding-dot dot-red"></div>
+    <div class="finding-text">
+      <strong>[Finding — e.g. "No CTA above the fold on mobile"]</strong>
+      <span class="detail">[Detail of what you saw and the likely impact on leads.]</span>
+    </div>
+    <span class="finding-tag tag-fix">Fix</span>
+  </div>
+
+  <div class="finding-row">
+    <div class="finding-dot dot-red"></div>
+    <div class="finding-text">
+      <strong>[Finding]</strong>
+      <span class="detail">[Detail.]</span>
+    </div>
+    <span class="finding-tag tag-fix">Fix</span>
+  </div>
+
+  <div class="finding-row">
+    <div class="finding-dot dot-yellow"></div>
+    <div class="finding-text">
+      <strong>[Finding]</strong>
+      <span class="detail">[Detail.]</span>
+    </div>
+    <span class="finding-tag tag-improve">Improve</span>
+  </div>
+
+  <div class="finding-row">
+    <div class="finding-dot dot-green"></div>
+    <div class="finding-text">
+      <strong>[What's working]</strong>
+      <span class="detail">[Detail.]</span>
+    </div>
+    <span class="finding-tag tag-keep">Keep</span>
+  </div>
+
+  <div class="opportunity-box">
+    <div class="opp-label">Conversion Opportunity</div>
+    <p>[Specific lever — e.g. "Adding a sticky click-to-call button on mobile and a visible testimonial section above the fold could meaningfully increase the percentage of visitors who take action."]</p>
+  </div>
+
+  <div class="page-footer">
+    <span class="footer-brand">SB Creative Studio · Website Blueprint</span>
+    <span class="footer-pg">4</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     PAGE 5 — SECTION 3: LOCAL SEO
+════════════════════════════════════════════ -->
+<div class="page">
+  <div class="section-header">
+    <div style="display:flex;align-items:flex-start;flex:1;">
+      <div class="section-num">03</div>
+      <div class="section-title-block">
+        <div class="section-eyebrow">On-Page, GBP, Keyword Visibility, AI Visibility</div>
+        <div class="section-title">Local SEO &amp; AI Visibility</div>
+      </div>
+    </div>
+    <div class="section-url">[CLIENT URL]</div>
+  </div>
+
+  <div class="score-row">
+    <div class="score-badge red">
+      <div class="score-num">3</div>
+      <div class="score-label">/ 10</div>
+    </div>
+    <div class="score-summary">
+      [Is this site findable by local searchers? Look for: city/service in page titles and H1s, Google Business Profile claimed and optimized, NAP (name/address/phone) consistent, schema markup present, keyword rankings vs. actual traffic capture.]
+    </div>
+  </div>
+
+  <div class="findings-label">On-Page &amp; GBP Findings</div>
+
+  <div class="finding-row">
+    <div class="finding-dot dot-red"></div>
+    <div class="finding-text">
+      <strong>[Finding — e.g. "Page titles don't include city or service terms"]</strong>
+      <span class="detail">[Why this matters for local visibility.]</span>
+    </div>
+    <span class="finding-tag tag-fix">Fix</span>
+  </div>
+
+  <div class="finding-row">
+    <div class="finding-dot dot-red"></div>
+    <div class="finding-text">
+      <strong>[Finding]</strong>
+      <span class="detail">[Detail.]</span>
+    </div>
+    <span class="finding-tag tag-fix">Fix</span>
+  </div>
+
+  <div class="finding-row">
+    <div class="finding-dot dot-yellow"></div>
+    <div class="finding-text">
+      <strong>[Finding]</strong>
+      <span class="detail">[Detail.]</span>
+    </div>
+    <span class="finding-tag tag-improve">Improve</span>
+  </div>
+
+  <div class="finding-row">
+    <div class="finding-dot dot-green"></div>
+    <div class="finding-text">
+      <strong>[What's working]</strong>
+      <span class="detail">[Detail.]</span>
+    </div>
+    <span class="finding-tag tag-keep">Keep</span>
+  </div>
+
+  <!-- KEYWORD VISIBILITY SUBSECTION -->
+  <div style="margin-top:18px;margin-bottom:4px;">
+    <div class="findings-label">Keyword Visibility</div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:14px;">
+    <div style="border:1px solid #E8E5E0;border-radius:4px;padding:10px 12px;">
+      <div style="font-family:'Archivo',sans-serif;font-size:7pt;letter-spacing:0.1em;text-transform:uppercase;color:#B0ABA1;margin-bottom:4px;">Keywords Ranking</div>
+      <div style="font-family:'Archivo',sans-serif;font-size:16pt;font-weight:800;color:#2A2621;line-height:1;">[#]</div>
+      <div style="font-family:'Work Sans',sans-serif;font-size:8.5pt;color:#6B6459;margin-top:2px;">tracked terms</div>
+    </div>
+    <div style="border:1px solid #E8E5E0;border-radius:4px;padding:10px 12px;">
+      <div style="font-family:'Archivo',sans-serif;font-size:7pt;letter-spacing:0.1em;text-transform:uppercase;color:#B0ABA1;margin-bottom:4px;">Top Position</div>
+      <div style="font-family:'Archivo',sans-serif;font-size:16pt;font-weight:800;color:#2A2621;line-height:1;">#[N]</div>
+      <div style="font-family:'Work Sans',sans-serif;font-size:8.5pt;color:#6B6459;margin-top:2px;">[term]</div>
+    </div>
+    <div style="border:1px solid #E8E5E0;border-radius:4px;padding:10px 12px;">
+      <div style="font-family:'Archivo',sans-serif;font-size:7pt;letter-spacing:0.1em;text-transform:uppercase;color:#B0ABA1;margin-bottom:4px;">CTR Gap</div>
+      <div style="font-family:'Archivo',sans-serif;font-size:16pt;font-weight:800;color:#b85555;line-height:1;">[Yes/No]</div>
+      <div style="font-family:'Work Sans',sans-serif;font-size:8.5pt;color:#6B6459;margin-top:2px;">ranking but low clicks</div>
+    </div>
+  </div>
+
+  <div class="finding-row">
+    <div class="finding-dot dot-red"></div>
+    <div class="finding-text">
+      <strong>[Keyword finding — e.g. "Ranking for [city] pest control but capturing near-zero clicks"]</strong>
+      <span class="detail">[Explain the likely cause: weak meta titles/descriptions, local pack stealing organic clicks, low domain authority vs. competitors. Be specific about which terms and positions if data is available.]</span>
+    </div>
+    <span class="finding-tag tag-fix">Fix</span>
+  </div>
+
+  <div class="finding-row">
+    <div class="finding-dot dot-yellow"></div>
+    <div class="finding-text">
+      <strong>[Keyword finding — e.g. "Heavy local pack dependency — organic rankings not the primary traffic driver"]</strong>
+      <span class="detail">[Note if GBP/map pack is doing the heavy lifting while organic positions are weak. This is a vulnerability — if GBP visibility slips, there's no organic floor to fall back on.]</span>
+    </div>
+    <span class="finding-tag tag-improve">Improve</span>
+  </div>
+
+  <!-- AEO / AI VISIBILITY SUBSECTION -->
+  <div style="margin-top:18px;margin-bottom:4px;">
+    <div class="findings-label">AI &amp; Answer Engine Visibility</div>
+  </div>
+
+  <p style="font-family:'Work Sans',sans-serif;font-size:9.5pt;color:#6B6459;line-height:1.6;margin-bottom:12px;">When someone asks ChatGPT, Google's AI Overview, or Siri "who's the best [service] company in [city]" — does your business come up? This is increasingly where buying decisions start, especially on mobile. We tested a handful of likely queries for this business.</p>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;">
+    <div style="border:1px solid #E8E5E0;border-radius:4px;padding:12px 14px;">
+      <div style="font-family:'Archivo',sans-serif;font-size:7pt;letter-spacing:0.1em;text-transform:uppercase;color:#B0ABA1;margin-bottom:6px;">AI Visibility Status</div>
+      <div style="font-family:'Archivo',sans-serif;font-size:13pt;font-weight:800;color:#2A2621;line-height:1;margin-bottom:4px;">[Appears / Inconsistent / Not Found]</div>
+      <div style="font-family:'Work Sans',sans-serif;font-size:8.5pt;color:#6B6459;">across tested AI platforms</div>
+    </div>
+    <div style="border:1px solid #E8E5E0;border-radius:4px;padding:12px 14px;">
+      <div style="font-family:'Archivo',sans-serif;font-size:7pt;letter-spacing:0.1em;text-transform:uppercase;color:#B0ABA1;margin-bottom:6px;">Queries Tested</div>
+      <div style="font-family:'Work Sans',sans-serif;font-size:9pt;color:#2A2621;line-height:1.6;">[List 2-3 queries used, e.g. "best pest control in Weatherford TX", "who do I call for rodents near me"]</div>
+    </div>
+  </div>
+
+  <div class="finding-row">
+    <div class="finding-dot dot-red" style="margin-top:5px;"></div>
+    <div class="finding-text">
+      <strong>[AI finding — e.g. "Business does not appear in AI-generated recommendations for core service queries"]</strong>
+      <span class="detail">[Explain the likely cause: inconsistent NAP across directories, thin service page content, no FAQ schema, or weak GBP signals. AI tools pull from the same signals as local SEO — if the foundation is weak, AI recommendations default to larger brands.]</span>
+    </div>
+    <span class="finding-tag tag-fix">Fix</span>
+  </div>
+
+  <div class="finding-row">
+    <div class="finding-dot dot-yellow" style="margin-top:5px;"></div>
+    <div class="finding-text">
+      <strong>[AI finding — e.g. "When business does appear, description is generic and doesn't highlight service differentiators"]</strong>
+      <span class="detail">[AI tools pull from your website copy, GBP description, and review language. Thin or generic content means generic recommendations — or none at all.]</span>
+    </div>
+    <span class="finding-tag tag-improve">Improve</span>
+  </div>
+
+  <div class="opportunity-box">
+    <div class="opp-label">Local SEO &amp; AI Opportunity</div>
+    <p>[Specific — e.g. "Rewriting page titles and meta descriptions with city + service terms addresses the CTR gap, while adding FAQ schema and strengthening GBP signals would improve both traditional local rankings and AI recommendation eligibility at the same time — two problems, one fix direction."]</p>
+  </div>
+
+  <div class="page-footer">
+    <span class="footer-brand">SB Creative Studio · Website Blueprint</span>
+    <span class="footer-pg">5</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     PAGE 6 — SECTION 4: CONTENT & MESSAGING
+════════════════════════════════════════════ -->
+<div class="page">
+  <div class="section-header">
+    <div style="display:flex;align-items:flex-start;flex:1;">
+      <div class="section-num">04</div>
+      <div class="section-title-block">
+        <div class="section-eyebrow">Headlines, Copy Clarity, Positioning</div>
+        <div class="section-title">Content &amp; Messaging</div>
+      </div>
+    </div>
+    <div class="section-url">[CLIENT URL]</div>
+  </div>
+
+  <div class="score-row">
+    <div class="score-badge yellow">
+      <div class="score-num">5</div>
+      <div class="score-label">/ 10</div>
+    </div>
+    <div class="score-summary">
+      [Does the copy actually communicate who this business is for and why to choose them? Look for: clarity of headline, specificity of service descriptions, differentiation from competitors, reading level and tone fit for the audience.]
+    </div>
+  </div>
+
+  <div class="findings-label">Findings</div>
+
+  <div class="finding-row">
+    <div class="finding-dot dot-red"></div>
+    <div class="finding-text">
+      <strong>[Finding — e.g. "Homepage headline is generic — doesn't say what the business does"]</strong>
+      <span class="detail">[Detail.]</span>
+    </div>
+    <span class="finding-tag tag-fix">Fix</span>
+  </div>
+
+  <div class="finding-row">
+    <div class="finding-dot dot-yellow"></div>
+    <div class="finding-text">
+      <strong>[Finding]</strong>
+      <span class="detail">[Detail.]</span>
+    </div>
+    <span class="finding-tag tag-improve">Improve</span>
+  </div>
+
+  <div class="finding-row">
+    <div class="finding-dot dot-yellow"></div>
+    <div class="finding-text">
+      <strong>[Finding]</strong>
+      <span class="detail">[Detail.]</span>
+    </div>
+    <span class="finding-tag tag-improve">Improve</span>
+  </div>
+
+  <div class="finding-row">
+    <div class="finding-dot dot-green"></div>
+    <div class="finding-text">
+      <strong>[What's working]</strong>
+      <span class="detail">[Detail.]</span>
+    </div>
+    <span class="finding-tag tag-keep">Keep</span>
+  </div>
+
+  <div class="opportunity-box">
+    <div class="opp-label">Messaging Opportunity</div>
+    <p>[Specific — e.g. "Rewriting the homepage headline to name the service, the city, and who it's for in one sentence would immediately sharpen the site's first impression and improve bounce rate."]</p>
+  </div>
+
+  <div class="page-footer">
+    <span class="footer-brand">SB Creative Studio · Website Blueprint</span>
+    <span class="footer-pg">6</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     PAGE 7 — SECTION 5: TECHNICAL HEALTH
+════════════════════════════════════════════ -->
+<div class="page">
+  <div class="section-header">
+    <div style="display:flex;align-items:flex-start;flex:1;">
+      <div class="section-num">05</div>
+      <div class="section-title-block">
+        <div class="section-eyebrow">Speed, Mobile, Broken Links</div>
+        <div class="section-title">Technical Health</div>
+      </div>
+    </div>
+    <div class="section-url">[CLIENT URL]</div>
+  </div>
+
+  <div class="score-row">
+    <div class="score-badge red">
+      <div class="score-num">4</div>
+      <div class="score-label">/ 10</div>
+    </div>
+    <div class="score-summary">
+      [How does the site perform technically? Check: PageSpeed mobile/desktop scores (via PageSpeed Insights), mobile layout integrity, SSL active, obvious broken links or 404s, image optimization, hosting speed.]
+    </div>
+  </div>
+
+  <div class="findings-label">Findings</div>
+
+  <div class="finding-row">
+    <div class="finding-dot dot-red"></div>
+    <div class="finding-text">
+      <strong>[Finding — e.g. "Mobile PageSpeed score: 31 — severely impacts search ranking and load experience"]</strong>
+      <span class="detail">[Primary cause if visible — large unoptimized images, render-blocking scripts, etc.]</span>
+    </div>
+    <span class="finding-tag tag-fix">Fix</span>
+  </div>
+
+  <div class="finding-row">
+    <div class="finding-dot dot-red"></div>
+    <div class="finding-text">
+      <strong>[Finding]</strong>
+      <span class="detail">[Detail.]</span>
+    </div>
+    <span class="finding-tag tag-fix">Fix</span>
+  </div>
+
+  <div class="finding-row">
+    <div class="finding-dot dot-yellow"></div>
+    <div class="finding-text">
+      <strong>[Finding]</strong>
+      <span class="detail">[Detail.]</span>
+    </div>
+    <span class="finding-tag tag-improve">Improve</span>
+  </div>
+
+  <div class="finding-row">
+    <div class="finding-dot dot-green"></div>
+    <div class="finding-text">
+      <strong>[What's working]</strong>
+      <span class="detail">[Detail.]</span>
+    </div>
+    <span class="finding-tag tag-keep">Keep</span>
+  </div>
+
+  <div class="opportunity-box">
+    <div class="opp-label">Technical Opportunity</div>
+    <p>[Specific — e.g. "Compressing images and addressing the render-blocking scripts flagged in PageSpeed Insights would be the highest-leverage technical fix — directly affecting both load time and Google rankings."]</p>
+  </div>
+
+  <div class="page-footer">
+    <span class="footer-brand">SB Creative Studio · Website Blueprint</span>
+    <span class="footer-pg">7</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     PAGE 8 — SECTION 6: COMPETITOR COMPARISON
+════════════════════════════════════════════ -->
+<div class="page">
+  <div class="section-header">
+    <div style="display:flex;align-items:flex-start;flex:1;">
+      <div class="section-num">06</div>
+      <div class="section-title-block">
+        <div class="section-eyebrow">How You Stack Up</div>
+        <div class="section-title">Competitive Landscape</div>
+      </div>
+    </div>
+    <div class="section-url">[CLIENT URL]</div>
+  </div>
+
+  <div class="score-row">
+    <div class="score-badge yellow">
+      <div class="score-num">6</div>
+      <div class="score-label">/ 10</div>
+    </div>
+    <div class="score-summary">
+      [How does this site compare to the top 2-3 competitors in the same market? Look at 2-3 real local competitors — note what they do better, what this site does better, and where the clearest differentiation gap exists.]
+    </div>
+  </div>
+
+  <div style="margin-bottom:18px;">
+    <div class="findings-label">Competitors reviewed</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;">
+      <div style="border:1px solid #E8E5E0;border-radius:4px;padding:10px 12px;">
+        <div style="font-family:'Archivo',sans-serif;font-size:7.5pt;letter-spacing:0.1em;text-transform:uppercase;color:#B0ABA1;margin-bottom:3px;">Competitor 1</div>
+        <div style="font-family:'Work Sans',sans-serif;font-size:9.5pt;color:#2A2621;font-weight:600;">[Name]</div>
+        <div style="font-family:'Work Sans',sans-serif;font-size:8.5pt;color:#B0ABA1;">[URL]</div>
+      </div>
+      <div style="border:1px solid #E8E5E0;border-radius:4px;padding:10px 12px;">
+        <div style="font-family:'Archivo',sans-serif;font-size:7.5pt;letter-spacing:0.1em;text-transform:uppercase;color:#B0ABA1;margin-bottom:3px;">Competitor 2</div>
+        <div style="font-family:'Work Sans',sans-serif;font-size:9.5pt;color:#2A2621;font-weight:600;">[Name]</div>
+        <div style="font-family:'Work Sans',sans-serif;font-size:8.5pt;color:#B0ABA1;">[URL]</div>
+      </div>
+      <div style="border:1px solid #E8E5E0;border-radius:4px;padding:10px 12px;">
+        <div style="font-family:'Archivo',sans-serif;font-size:7.5pt;letter-spacing:0.1em;text-transform:uppercase;color:#B0ABA1;margin-bottom:3px;">Competitor 3</div>
+        <div style="font-family:'Work Sans',sans-serif;font-size:9.5pt;color:#2A2621;font-weight:600;">[Name]</div>
+        <div style="font-family:'Work Sans',sans-serif;font-size:8.5pt;color:#B0ABA1;">[URL]</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="findings-label">Where they beat you (right now)</div>
+  <div class="finding-row">
+    <div class="finding-dot dot-red"></div>
+    <div class="finding-text"><strong>[Gap — e.g. "Competitor A ranks for '[city] pest control' — you don't appear in the top 10"]</strong><span class="detail">[Detail.]</span></div>
+    <span class="finding-tag tag-fix">Gap</span>
+  </div>
+  <div class="finding-row">
+    <div class="finding-dot dot-yellow"></div>
+    <div class="finding-text"><strong>[Gap]</strong><span class="detail">[Detail.]</span></div>
+    <span class="finding-tag tag-improve">Gap</span>
+  </div>
+
+  <div class="findings-label" style="margin-top:16px;">Where you have the edge</div>
+  <div class="finding-row">
+    <div class="finding-dot dot-green"></div>
+    <div class="finding-text"><strong>[Advantage]</strong><span class="detail">[Detail.]</span></div>
+    <span class="finding-tag tag-keep">Advantage</span>
+  </div>
+  <div class="finding-row">
+    <div class="finding-dot dot-green"></div>
+    <div class="finding-text"><strong>[Advantage]</strong><span class="detail">[Detail.]</span></div>
+    <span class="finding-tag tag-keep">Advantage</span>
+  </div>
+
+  <div class="opportunity-box">
+    <div class="opp-label">Competitive Opportunity</div>
+    <p>[The clearest gap you could close — or the edge you could lean into harder — to pull ahead of the field.]</p>
+  </div>
+
+  <div class="page-footer">
+    <span class="footer-brand">SB Creative Studio · Website Blueprint</span>
+    <span class="footer-pg">8</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     PAGE 9 — SITE STRUCTURE
+════════════════════════════════════════════ -->
+<div class="page">
+  <div class="section-header">
+    <div style="display:flex;align-items:flex-start;flex:1;">
+      <div class="section-num" style="color:#D6EAEA; font-size:36pt;">A</div>
+      <div class="section-title-block">
+        <div class="section-eyebrow">Supporting Data</div>
+        <div class="section-title">Site Structure</div>
+      </div>
+    </div>
+    <div class="section-url">[CLIENT URL]</div>
+  </div>
+
+  <p style="font-family:'Work Sans',sans-serif;font-size:10pt;color:#6B6459;line-height:1.65;margin-bottom:22px;">This is a complete index of every URL currently on your website — pulled directly from your sitemap. It shows what Google can find and index, which pages exist, and where structural gaps are relative to your services and service area.</p>
+
+  <!-- SUMMARY STATS -->
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:24px;">
+    <div style="border:1px solid #E8E5E0;border-radius:5px;padding:14px 16px;text-align:center;">
+      <div style="font-family:'Archivo',sans-serif;font-size:7pt;letter-spacing:0.12em;text-transform:uppercase;color:#B0ABA1;margin-bottom:6px;">Total Pages Indexed</div>
+      <div style="font-family:'Archivo',sans-serif;font-size:26pt;font-weight:800;color:#2A2621;line-height:1;">[#]</div>
+    </div>
+    <div style="border:1px solid #E8E5E0;border-radius:5px;padding:14px 16px;text-align:center;">
+      <div style="font-family:'Archivo',sans-serif;font-size:7pt;letter-spacing:0.12em;text-transform:uppercase;color:#B0ABA1;margin-bottom:6px;">Service Pages</div>
+      <div style="font-family:'Archivo',sans-serif;font-size:26pt;font-weight:800;color:#2A2621;line-height:1;">[#]</div>
+    </div>
+    <div style="border:1px solid #E8E5E0;border-radius:5px;padding:14px 16px;text-align:center;">
+      <div style="font-family:'Archivo',sans-serif;font-size:7pt;letter-spacing:0.12em;text-transform:uppercase;color:#B0ABA1;margin-bottom:6px;">Location Pages</div>
+      <div style="font-family:'Archivo',sans-serif;font-size:26pt;font-weight:800;color:#2A2621;line-height:1;">[#]</div>
+    </div>
+  </div>
+
+  <!-- URL TABLE -->
+  <div style="margin-bottom:22px;">
+    <div style="font-family:'Archivo',sans-serif;font-size:7.5pt;letter-spacing:0.14em;text-transform:uppercase;color:#33585A;font-weight:700;margin-bottom:10px;">Indexed URLs</div>
+    <table style="width:100%;border-collapse:collapse;">
+      <thead>
+        <tr style="background:#F9F8F7;">
+          <th style="font-family:'Archivo',sans-serif;font-size:7.5pt;letter-spacing:0.08em;text-transform:uppercase;color:#B0ABA1;font-weight:700;text-align:left;padding:8px 10px;border-bottom:1px solid #E8E5E0;">URL</th>
+          <th style="font-family:'Archivo',sans-serif;font-size:7.5pt;letter-spacing:0.08em;text-transform:uppercase;color:#B0ABA1;font-weight:700;text-align:left;padding:8px 10px;border-bottom:1px solid #E8E5E0;">Page Type</th>
+          <th style="font-family:'Archivo',sans-serif;font-size:7.5pt;letter-spacing:0.08em;text-transform:uppercase;color:#B0ABA1;font-weight:700;text-align:left;padding:8px 10px;border-bottom:1px solid #E8E5E0;">Last Modified</th>
+          <th style="font-family:'Archivo',sans-serif;font-size:7.5pt;letter-spacing:0.08em;text-transform:uppercase;color:#B0ABA1;font-weight:700;text-align:left;padding:8px 10px;border-bottom:1px solid #E8E5E0;">Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:0.5px solid #F0EDE8;">
+          <td style="font-family:'Work Sans',sans-serif;font-size:9pt;color:#2A2621;padding:8px 10px;">[URL]</td>
+          <td style="font-family:'Archivo',sans-serif;font-size:8pt;color:#6B6459;padding:8px 10px;">[Homepage / Service / Location / Blog]</td>
+          <td style="font-family:'Work Sans',sans-serif;font-size:8.5pt;color:#B0ABA1;padding:8px 10px;">[DATE]</td>
+          <td style="font-family:'Work Sans',sans-serif;font-size:8.5pt;color:#6B6459;padding:8px 10px;">[Any notes — e.g. "no H1", "thin content"]</td>
+        </tr>
+        <tr style="border-bottom:0.5px solid #F0EDE8;">
+          <td style="font-family:'Work Sans',sans-serif;font-size:9pt;color:#2A2621;padding:8px 10px;">[URL]</td>
+          <td style="font-family:'Archivo',sans-serif;font-size:8pt;color:#6B6459;padding:8px 10px;"></td>
+          <td style="font-family:'Work Sans',sans-serif;font-size:8.5pt;color:#B0ABA1;padding:8px 10px;"></td>
+          <td style="font-family:'Work Sans',sans-serif;font-size:8.5pt;color:#6B6459;padding:8px 10px;"></td>
+        </tr>
+        <tr style="border-bottom:0.5px solid #F0EDE8;">
+          <td style="font-family:'Work Sans',sans-serif;font-size:9pt;color:#2A2621;padding:8px 10px;">[URL]</td>
+          <td style="font-family:'Archivo',sans-serif;font-size:8pt;color:#6B6459;padding:8px 10px;"></td>
+          <td style="font-family:'Work Sans',sans-serif;font-size:8.5pt;color:#B0ABA1;padding:8px 10px;"></td>
+          <td style="font-family:'Work Sans',sans-serif;font-size:8.5pt;color:#6B6459;padding:8px 10px;"></td>
+        </tr>
+        <tr>
+          <td style="font-family:'Work Sans',sans-serif;font-size:9pt;color:#2A2621;padding:8px 10px;">[URL]</td>
+          <td style="font-family:'Archivo',sans-serif;font-size:8pt;color:#6B6459;padding:8px 10px;"></td>
+          <td style="font-family:'Work Sans',sans-serif;font-size:8.5pt;color:#B0ABA1;padding:8px 10px;"></td>
+          <td style="font-family:'Work Sans',sans-serif;font-size:8.5pt;color:#6B6459;padding:8px 10px;"></td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="font-family:'Work Sans',sans-serif;font-size:8pt;color:#B0ABA1;margin-top:6px;font-style:italic;">Add or remove rows as needed. For sites with 20+ pages, include only the most relevant URLs and note total count above.</p>
+  </div>
+
+  <!-- STRUCTURAL CALLOUT -->
+  <div style="background:#D6EAEA;border-left:3px solid #33585A;padding:14px 18px;border-radius:0 4px 4px 0;">
+    <div style="font-family:'Archivo',sans-serif;font-size:7.5pt;letter-spacing:0.14em;text-transform:uppercase;color:#1E4E50;font-weight:700;margin-bottom:5px;">What this means</div>
+    <p style="font-family:'Work Sans',sans-serif;font-size:10pt;color:#1E4E50;line-height:1.55;">[Plain language summary of what the site structure reveals. E.g. "With only 1 URL indexed, Google has a single page to evaluate this business against every possible search query — from 'emergency plumber' to 'water heater replacement Benbrook.' Every service you offer and every city you serve needs its own page to compete in local search."]</p>
+  </div>
+
+  <div class="page-footer">
+    <span class="footer-brand">SB Creative Studio · Website Blueprint</span>
+    <span class="footer-pg">11</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     PAGE 10 — KEYWORD VISIBILITY
+════════════════════════════════════════════ -->
+<div class="page">
+  <div class="section-header">
+    <div style="display:flex;align-items:flex-start;flex:1;">
+      <div class="section-num" style="color:#D6EAEA;font-size:36pt;">B</div>
+      <div class="section-title-block">
+        <div class="section-eyebrow">Supporting Data</div>
+        <div class="section-title">Keyword Visibility</div>
+      </div>
+    </div>
+    <div class="section-url">[CLIENT URL]</div>
+  </div>
+
+  <p style="font-family:'Work Sans',sans-serif;font-size:10pt;color:#6B6459;line-height:1.65;margin-bottom:22px;">This snapshot shows what terms your website currently ranks for in Google, at what positions, and whether those rankings are generating actual clicks — or sitting in positions too low to matter. Data sourced from [Ubersuggest / Google Search Console].</p>
+
+  <!-- VISIBILITY SUMMARY -->
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:12px;margin-bottom:24px;">
+    <div style="border:1px solid #E8E5E0;border-radius:5px;padding:12px 14px;text-align:center;">
+      <div style="font-family:'Archivo',sans-serif;font-size:7pt;letter-spacing:0.1em;text-transform:uppercase;color:#B0ABA1;margin-bottom:5px;">Keywords Ranking</div>
+      <div style="font-family:'Archivo',sans-serif;font-size:22pt;font-weight:800;color:#2A2621;line-height:1;">[#]</div>
+    </div>
+    <div style="border:1px solid #E8E5E0;border-radius:5px;padding:12px 14px;text-align:center;">
+      <div style="font-family:'Archivo',sans-serif;font-size:7pt;letter-spacing:0.1em;text-transform:uppercase;color:#B0ABA1;margin-bottom:5px;">In Top 10</div>
+      <div style="font-family:'Archivo',sans-serif;font-size:22pt;font-weight:800;color:#2A2621;line-height:1;">[#]</div>
+    </div>
+    <div style="border:1px solid #E8E5E0;border-radius:5px;padding:12px 14px;text-align:center;">
+      <div style="font-family:'Archivo',sans-serif;font-size:7pt;letter-spacing:0.1em;text-transform:uppercase;color:#B0ABA1;margin-bottom:5px;">Est. Monthly Traffic</div>
+      <div style="font-family:'Archivo',sans-serif;font-size:22pt;font-weight:800;color:#2A2621;line-height:1;">[#]</div>
+    </div>
+    <div style="border:1px solid #E8E5E0;border-radius:5px;padding:12px 14px;text-align:center;">
+      <div style="font-family:'Archivo',sans-serif;font-size:7pt;letter-spacing:0.1em;text-transform:uppercase;color:#B0ABA1;margin-bottom:5px;">CTR Gap</div>
+      <div style="font-family:'Archivo',sans-serif;font-size:22pt;font-weight:800;line-height:1;color:#b85555;">[Yes/No]</div>
+    </div>
+  </div>
+
+  <!-- KEYWORD TABLE -->
+  <div style="margin-bottom:22px;">
+    <div style="font-family:'Archivo',sans-serif;font-size:7.5pt;letter-spacing:0.14em;text-transform:uppercase;color:#33585A;font-weight:700;margin-bottom:10px;">Top Ranking Terms</div>
+    <table style="width:100%;border-collapse:collapse;">
+      <thead>
+        <tr style="background:#F9F8F7;">
+          <th style="font-family:'Archivo',sans-serif;font-size:7.5pt;letter-spacing:0.08em;text-transform:uppercase;color:#B0ABA1;font-weight:700;text-align:left;padding:8px 10px;border-bottom:1px solid #E8E5E0;">Keyword</th>
+          <th style="font-family:'Archivo',sans-serif;font-size:7.5pt;letter-spacing:0.08em;text-transform:uppercase;color:#B0ABA1;font-weight:700;text-align:center;padding:8px 10px;border-bottom:1px solid #E8E5E0;">Position</th>
+          <th style="font-family:'Archivo',sans-serif;font-size:7.5pt;letter-spacing:0.08em;text-transform:uppercase;color:#B0ABA1;font-weight:700;text-align:center;padding:8px 10px;border-bottom:1px solid #E8E5E0;">Monthly Volume</th>
+          <th style="font-family:'Archivo',sans-serif;font-size:7.5pt;letter-spacing:0.08em;text-transform:uppercase;color:#B0ABA1;font-weight:700;text-align:left;padding:8px 10px;border-bottom:1px solid #E8E5E0;">Intent</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:0.5px solid #F0EDE8;">
+          <td style="font-family:'Work Sans',sans-serif;font-size:9.5pt;color:#2A2621;padding:8px 10px;">[keyword]</td>
+          <td style="font-family:'Archivo',sans-serif;font-size:10pt;font-weight:700;color:#2A2621;text-align:center;padding:8px 10px;">#[N]</td>
+          <td style="font-family:'Work Sans',sans-serif;font-size:9pt;color:#6B6459;text-align:center;padding:8px 10px;">[#]</td>
+          <td style="font-family:'Archivo',sans-serif;font-size:7.5pt;padding:8px 10px;"><span style="background:#f1f6f1;color:#4a7a4a;border:1px solid #b0c8b0;padding:2px 7px;border-radius:3px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;">[Local / Branded / Informational]</span></td>
+        </tr>
+        <tr style="border-bottom:0.5px solid #F0EDE8;">
+          <td style="font-family:'Work Sans',sans-serif;font-size:9.5pt;color:#2A2621;padding:8px 10px;">[keyword]</td>
+          <td style="font-family:'Archivo',sans-serif;font-size:10pt;font-weight:700;color:#2A2621;text-align:center;padding:8px 10px;">#[N]</td>
+          <td style="font-family:'Work Sans',sans-serif;font-size:9pt;color:#6B6459;text-align:center;padding:8px 10px;">[#]</td>
+          <td style="font-family:'Archivo',sans-serif;font-size:7.5pt;padding:8px 10px;"><span style="background:#fdf8ee;color:#a07830;border:1px solid #e8d8a0;padding:2px 7px;border-radius:3px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;">[Local / Branded / Informational]</span></td>
+        </tr>
+        <tr style="border-bottom:0.5px solid #F0EDE8;">
+          <td style="font-family:'Work Sans',sans-serif;font-size:9.5pt;color:#2A2621;padding:8px 10px;">[keyword]</td>
+          <td style="font-family:'Archivo',sans-serif;font-size:10pt;font-weight:700;color:#2A2621;text-align:center;padding:8px 10px;">#[N]</td>
+          <td style="font-family:'Work Sans',sans-serif;font-size:9pt;color:#6B6459;text-align:center;padding:8px 10px;">[#]</td>
+          <td style="font-family:'Archivo',sans-serif;font-size:7.5pt;padding:8px 10px;"><span style="background:#fdf1f1;color:#b85555;border:1px solid #e8c5c5;padding:2px 7px;border-radius:3px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;">[Local / Branded / Informational]</span></td>
+        </tr>
+        <tr style="border-bottom:0.5px solid #F0EDE8;">
+          <td style="font-family:'Work Sans',sans-serif;font-size:9.5pt;color:#2A2621;padding:8px 10px;">[keyword]</td>
+          <td style="font-family:'Archivo',sans-serif;font-size:10pt;font-weight:700;color:#2A2621;text-align:center;padding:8px 10px;">#[N]</td>
+          <td style="font-family:'Work Sans',sans-serif;font-size:9pt;color:#6B6459;text-align:center;padding:8px 10px;">[#]</td>
+          <td style="font-family:'Archivo',sans-serif;font-size:7.5pt;padding:8px 10px;"><span style="background:#f1f6f1;color:#4a7a4a;border:1px solid #b0c8b0;padding:2px 7px;border-radius:3px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;">[Local / Branded / Informational]</span></td>
+        </tr>
+        <tr>
+          <td style="font-family:'Work Sans',sans-serif;font-size:9.5pt;color:#2A2621;padding:8px 10px;">[keyword]</td>
+          <td style="font-family:'Archivo',sans-serif;font-size:10pt;font-weight:700;color:#2A2621;text-align:center;padding:8px 10px;">#[N]</td>
+          <td style="font-family:'Work Sans',sans-serif;font-size:9pt;color:#6B6459;text-align:center;padding:8px 10px;">[#]</td>
+          <td style="font-family:'Archivo',sans-serif;font-size:7.5pt;padding:8px 10px;"><span style="background:#fdf8ee;color:#a07830;border:1px solid #e8d8a0;padding:2px 7px;border-radius:3px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;">[Local / Branded / Informational]</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="font-family:'Work Sans',sans-serif;font-size:8pt;color:#B0ABA1;margin-top:6px;font-style:italic;">Add or remove rows as needed. Focus on the most meaningful terms — branded, high-intent local, and any notable gaps.</p>
+  </div>
+
+  <!-- KEYWORD CALLOUT -->
+  <div style="background:#D6EAEA;border-left:3px solid #33585A;padding:14px 18px;border-radius:0 4px 4px 0;">
+    <div style="font-family:'Archivo',sans-serif;font-size:7.5pt;letter-spacing:0.14em;text-transform:uppercase;color:#1E4E50;font-weight:700;margin-bottom:5px;">What this means</div>
+    <p style="font-family:'Work Sans',sans-serif;font-size:10pt;color:#1E4E50;line-height:1.55;">[Plain language summary of the keyword picture. E.g. "Rankings exist primarily for branded terms — people who already know the business name. High-intent local searches like 'plumber Benbrook TX' and 'water heater replacement near me' return no presence, which means new customers searching cold can't find this business organically."]</p>
+  </div>
+
+  <div class="page-footer">
+    <span class="footer-brand">SB Creative Studio · Website Blueprint</span>
+    <span class="footer-pg">12</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     PAGE 11 — IMPLEMENTATION PLAN
+════════════════════════════════════════════ -->
+<div class="page">
+  <div class="section-header">
+    <div style="display:flex;align-items:flex-start;flex:1;">
+      <div class="section-num" style="color:#D6EAEA;">07</div>
+      <div class="section-title-block">
+        <div class="section-eyebrow">What Needs to Change</div>
+        <div class="section-title">Priority &amp; Impact</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COST OF INACTION BLOCK -->
+  <div style="background:#2A2621;border-radius:6px;padding:18px 22px;margin-bottom:20px;display:grid;grid-template-columns:1fr auto;gap:20px;align-items:center;">
+    <div>
+      <div style="font-family:'Archivo',sans-serif;font-size:7.5pt;letter-spacing:0.14em;text-transform:uppercase;color:#8C9A7C;margin-bottom:6px;font-weight:700;">The cost of staying put</div>
+      <p style="font-family:'Work Sans',sans-serif;font-size:10pt;color:#FAF7F2;line-height:1.6;">[1-2 sentences on what staying put is likely costing this business. Be specific and grounded — not hyperbolic. E.g. "Every month the conversion issues on this site go unaddressed, a portion of the visitors already finding you are leaving without calling. That's existing traffic producing fewer leads than it should."]</p>
+    </div>
+    <div style="text-align:center;flex-shrink:0;">
+      <div style="font-family:'Archivo',sans-serif;font-size:7pt;letter-spacing:0.1em;text-transform:uppercase;color:#6B6459;margin-bottom:4px;">Issues identified</div>
+      <div style="font-family:'Archivo',sans-serif;font-size:28pt;font-weight:800;color:#D6EAEA;line-height:1;">[#]</div>
+    </div>
+  </div>
+
+  <p style="font-family:'Work Sans',sans-serif;font-size:9.5pt;color:#6B6459;line-height:1.6;margin-bottom:16px;">The issues below are organized by the size of the gap they're creating — not by how easy they are to fix. The problems in the top row are the ones that matter most.</p>
+
+  <div class="matrix-grid">
+    <div class="matrix-cell high">
+      <div class="matrix-header">Highest Impact Gaps</div>
+      <div class="matrix-item">[Problem name — describe the gap, not the fix. E.g. "No visible CTA above the fold on mobile"]</div>
+      <div class="matrix-item">[Problem name]</div>
+      <div class="matrix-item">[Problem name]</div>
+      <div class="matrix-item">[Problem name]</div>
+    </div>
+    <div class="matrix-cell medium">
+      <div class="matrix-header">Significant Gaps</div>
+      <div class="matrix-item">[Problem name]</div>
+      <div class="matrix-item">[Problem name]</div>
+      <div class="matrix-item">[Problem name]</div>
+    </div>
+    <div class="matrix-cell polish">
+      <div class="matrix-header">Worth Addressing</div>
+      <div class="matrix-item">[Problem name]</div>
+      <div class="matrix-item">[Problem name]</div>
+      <div class="matrix-item">[Problem name]</div>
+    </div>
+    <div class="matrix-cell hold">
+      <div class="matrix-header">Lower Priority</div>
+      <div class="matrix-item">[Problem name]</div>
+      <div class="matrix-item">[Problem name]</div>
+    </div>
+  </div>
+
+  <div class="opportunity-box" style="margin-top:14px;">
+    <div class="opp-label">The bottom line</div>
+    <p>[2 sentences max. What does this site need — at the level of a decision, not a task list. E.g. "This site needs a structural rethink, not a patch job. The issues compounding here — conversion, SEO, and trust signals — are interconnected enough that fixing them piecemeal is slower and more expensive than addressing them together."]</p>
+  </div>
+
+  <div class="page-footer">
+    <span class="footer-brand">SB Creative Studio · Website Blueprint</span>
+    <span class="footer-pg">11</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     PAGE 10 — NEXT STEPS + CTA
+════════════════════════════════════════════ -->
+<div class="page">
+  <div class="section-header">
+    <div style="display:flex;align-items:flex-start;flex:1;">
+      <div class="section-num" style="color:#D6EAEA;">08</div>
+      <div class="section-title-block">
+        <div class="section-eyebrow">What Comes Next</div>
+        <div class="section-title">Your Next Steps</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="next-step-row">
+    <div class="step-circle">1</div>
+    <div>
+      <div class="step-title">Review this document before our call</div>
+      <div class="step-body">Read through the findings and flag anything you want to dig into, push back on, or get more context about. No prep required — but the more specific your questions, the more useful the conversation.</div>
+    </div>
+  </div>
+
+  <div class="next-step-row">
+    <div class="step-circle">2</div>
+    <div>
+      <div class="step-title">Walkthrough call — [DATE / LINK]</div>
+      <div class="step-body">We'll walk through each section together, I'll answer your questions, and we'll talk through what a realistic fix plan looks like — whether that's a full rebuild, targeted changes, or something in between.</div>
+    </div>
+  </div>
+
+  <div class="next-step-row">
+    <div class="step-circle">3</div>
+    <div>
+      <div class="step-title">Decide what's right for your business</div>
+      <div class="step-body">After the call you'll have a clear picture of what the issues actually are, what fixing them would take, and whether working with SB Creative Studio on a full site is the right next move. No pressure on the call — just clarity.</div>
+    </div>
+  </div>
+
+  <div class="cta-box">
+    <div>
+      <p>A full website redesign through SB Creative Studio starts at $8,500 and includes everything in this review addressed, built, and launched — with copywriting, SEO foundation, and mobile-first design included.</p>
+    </div>
+    <div class="cta-pill">
+      <small>Starting at</small>
+      $8,500
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span class="footer-brand">SB Creative Studio · sbcreativestudio.com</span>
+    <span class="footer-pg">12</span>
+  </div>
+</div>
+
+</body>
+</html>
